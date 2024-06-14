@@ -1,0 +1,54 @@
+@import url('./Chatbot/ChatbotPage.css');
+@import url('./HomePage/HomePage.css');
+
+
+main {
+  text-align: center;
+  min-height: 100vh;
+  background-color: #ff4f6e;
+  margin: 0;
+  padding: 0;
+}
+
+.main-title {
+  margin: 0;
+  padding: 1em;
+  font-size: 3em;
+  color: white;
+}
+
+.main-actions {
+  display: flex;
+  margin: auto;
+  padding: 10px;
+  gap: 10px;
+  justify-content: center;
+}
+
+.main-actions button {
+  padding: 8px 16px;
+  color: white;
+  background: transparent;
+  border-radius: 50px;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.main-actions button:first-child {
+  background-color: white;
+  color: #ff4f6e;
+}
+
+.main-actions button:last-child {
+  background-color: white;
+  color: #ff4f6e;
+}
+
+/* 
+SELECTORS
+1. tags
+2. classes
+3. ids
+4. generic: input-types, psuedosoclasses, ...
+
+*/
