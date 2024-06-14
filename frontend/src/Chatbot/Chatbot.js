@@ -1,5 +1,6 @@
 // src/components/Chatbot.js
 import React, { useState } from 'react';
+import './ChatbotPage.css'
 
 function Chatbot() {
   const [messages, setMessages] = useState([]);
@@ -12,9 +13,23 @@ function Chatbot() {
   };
 
   return (
-    <section>
-      Chatbot
-    </section>
+    <main className='chatbot-page'>
+      <div className='chat-log'>
+        <div className='chat-message'>
+          <div className='avatar'>
+          </div>
+            <div className='message'>
+              Hello there
+            </div>
+        </div>
+      </div>
+
+      <div className='chatbox'>
+      <textarea className='chatbox-input'
+      placeholder='Enter your query here'>
+      </textarea>
+      </div>
+    </main>
   );
 }
 

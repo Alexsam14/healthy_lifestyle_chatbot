@@ -32,6 +32,7 @@ main {
   border-radius: 50px;
   border: 2px solid white;
   cursor: pointer;
+  transition: e;
 }
 
 .main-actions button:first-child {

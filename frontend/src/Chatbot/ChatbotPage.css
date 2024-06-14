@@ -1,0 +1,45 @@
+.chatbox{
+    position: absolute;
+    bottom: 10px; left: 0; right: 0;
+}
+
+.chatbox-input{
+    width: 90%;
+    border-radius: 10px;
+    border: 30px;
+    margin: 15px;
+    padding: 12px;
+}
+
+.chatbot-page{
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+}
+
+.avatar{
+    width: 40px; /* Adjust width and height as needed */
+    height: 40px;
+    border-radius: 50%; /* Make it a circle with border-radius */
+    background-color: white; /* Optional: Background color for avatar */
+    display: flex;
+    color: #fff; /* Optional: Text color for avatar */
+}
+
+.message{
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.chat-message{
+    padding: 12px;
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+}
+
+.chat-log{
+    padding: 24px;
+    text-align: left;
+    display: flex;
+}
