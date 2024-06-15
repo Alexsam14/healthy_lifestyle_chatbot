@@ -17,29 +17,50 @@
     gap: 20px; 
 }
 
-.avatar{
-    width: 40px; /* Adjust width and height as needed */
-    height: 40px;
-    border-radius: 50%; /* Make it a circle with border-radius */
-    background-color: white; /* Optional: Background color for avatar */
-    display: flex;
-    color: #fff; /* Optional: Text color for avatar */
-}
-
-.message{
-    padding-left: 40px;
-    padding-right: 40px;
-}
-
-.chat-message{
-    padding: 12px;
-    padding-left: 40px;
-    padding-right: 40px;
-    display: flex;
-}
-
 .chat-log{
     padding: 24px;
     text-align: left;
-    display: flex;
+
 }
+
+.chat-message{
+
+}
+
+.chat-message-center{
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto ;
+    display: flex;
+    padding: 12px;
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: rgba(20, 13, 13, 0.1);
+}
+
+.avatar{
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%; 
+    background-color: white;
+    display: flex;
+    color: #fff; 
+    margin-left: 20px;
+}
+
+.avatar-AI{
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%; 
+    background-color: white;
+    display: flex;
+    background-color: green; 
+    margin-left: 20px;
+}
+
+.message {
+    margin-left: 100px;
+    margin-right: 40px;
+    height: 100%;
+  }
+

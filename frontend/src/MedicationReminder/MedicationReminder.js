@@ -1,5 +1,6 @@
 // src/components/MedicationReminder.js
 import React, { useState } from 'react';
+import "./MedicationReminder.css"
 
 function MedicationReminder() {
   const [reminders, setReminders] = useState([]);
@@ -12,19 +13,28 @@ function MedicationReminder() {
 
   return (
     <div className="medication-reminder">
-      <h2>Medication Reminder</h2>
-      <ul>
-        {reminders.map((reminder, index) => (
-          <li key={index}>{reminder}</li>
-        ))}
-      </ul>
-      <input
-        type="text"
-        value={newReminder}
-        onChange={(e) => setNewReminder(e.target.value)}
-        placeholder="Add a new reminder..."
-      />
-      <button onClick={addReminder}>Add Reminder</button>
+      <h1 className='main-heading'>Welcome to the medication
+        reminder
+      </h1>
+      <div className='reminder-dialogue-box'>
+        <form className='forms'>
+        <input className='form_1' type="text" name="drugname" placeholder="Drug" required>
+        </input>
+        <input className='form_2' type="number" name="duration" placeholder='Reminder duration' required>
+        </input>
+        <input className="submit" type="submit" value="Submit">
+        </input>
+        </form>
+      </div>
+
+      <div className='dashboard'>
+
+      </div>
+
+      <footer>
+        <p>&copy; 2024 My Website</p>
+      </footer>
+
     </div>
   );
 }

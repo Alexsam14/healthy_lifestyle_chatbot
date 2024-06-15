@@ -15,12 +15,25 @@ function Chatbot() {
   return (
     <main className='chatbot-page'>
       <div className='chat-log'>
+
         <div className='chat-message'>
-          <div className='avatar'>
-          </div>
+          <div className='chat-mesage-center'>
+            <div className='avatar'>
+            </div>
             <div className='message'>
               Hello there
             </div>
+          </div>
+        </div>
+
+        <div className='chat-message-AI'>
+          <div className='chat-mesage-center'>
+            <div className='avatar-AI'>
+            </div>
+            <div className='message'>
+              I am an AI.
+            </div>
+          </div>
         </div>
       </div>
 
