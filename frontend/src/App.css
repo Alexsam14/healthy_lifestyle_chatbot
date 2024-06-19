@@ -45,11 +45,25 @@ main {
   color: #ff4f6e;
 }
 
-/* 
-SELECTORS
-1. tags
-2. classes
-3. ids
-4. generic: input-types, psuedosoclasses, ...
+/* Dashboard */
+.reminder-card{
+  display: flex;
+  gap: 20px;
+  background: gray;
+  padding: 10px;
+  margin: 10px;
+}
 
-*/
+.drug-name{
+  width: 50%;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.modification{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: blue;
+  flex-basis: 20%;
+}
