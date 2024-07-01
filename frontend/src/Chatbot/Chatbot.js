@@ -3,47 +3,82 @@ import React, { useState } from 'react';
 import './ChatbotPage.css'
 
 function Chatbot() {
-  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+  const [chatlog, setChatLog] = useState([]);
+  const [error, setError] = useState("");
 
-  const sendMessage = (message) => {
-    setMessages([...messages, { user: 'me', text: message }]);
-    // Add logic to process message and get response
-    const response = "This is a response from the chatbot"; // Placeholder
-    setMessages([...messages, { user: 'me', text: message }, { user: 'bot', text: response }]);
-  };
+  async function getResponse(e){
+    e.preventDefault();
+
+
+    if (!input.trim()) {
+      setError("Please enter a message");
+      return;
+    }
+
+    try{
+      const options = {
+        method: 'POST',
+        body: JSON.stringify({
+          history: chatlog,
+          message: input
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      const response = await fetch("http://localhost:3080/gemini", options);
+      const data = await response.text();
+      console.log(">> response: ", data);
+      setChatLog(oldChatLog => [...oldChatLog,{
+        role: "user",
+        parts: [{'text': input}]
+      },{
+        role: "model",
+        parts: data
+      }
+      ])
+      setInput("")
+
+      console.log(">>", chatlog);
+    } catch (error) {
+      setError("Something went wrong!");
+    }
+  }
 
   return (
     <main className='chatbot-page'>
       <div className='chat-log'>
+        {/* {chatlog.map ((message, index) => (
+            <ChatMessage key={index} message={message}/>
+        ))} */}
+      </div>
 
-        <div className='chat-message'>
+      <div className='chatbox'>
+
+      <form onSubmit={getResponse}>
+      <input className='chatbox-input' value={input} onChange={(e)=>setInput(e.target.value)}
+      placeholder='Enter your query here'>
+      </input>
+      </form>
+
+      </div>
+    </main>
+  );
+}
+
+const ChatMessage = ({message}) => {
+  return (
+    <div className='chat-message'>
           <div className='chat-mesage-center'>
             <div className='avatar'>
             </div>
             <div className='message'>
-              Hello there
+            {message.parts.text}
             </div>
           </div>
         </div>
-
-        <div className='chat-message-AI'>
-          <div className='chat-mesage-center'>
-            <div className='avatar-AI'>
-            </div>
-            <div className='message'>
-              I am an AI.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className='chatbox'>
-      <textarea className='chatbox-input'
-      placeholder='Enter your query here'>
-      </textarea>
-      </div>
-    </main>
-  );
+  )
 }
 
 export default Chatbot;

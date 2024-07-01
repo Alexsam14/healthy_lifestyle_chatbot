@@ -40,7 +40,12 @@ main {
   color: #ff4f6e;
 }
 
-.main-actions button:last-child {
+.main-actions button:nth-child(2) {
+  background-color: white;
+  color: #ff4f6e;
+}
+
+.main-actions button:last-child{
   background-color: white;
   color: #ff4f6e;
 }
@@ -66,4 +71,12 @@ main {
   justify-content: center;
   background: blue;
   flex-basis: 20%;
+}
+
+.register-link p {
+  display: inline;
+}
+
+.register-link a {
+  display: inline;
 }
