@@ -1,9 +1,11 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const bodyparser = require('body-parser')
+const cors = require("cors")
 
 const app =express();
-app.use(bodyparser.urlencoded({extended: true}));
+app.use(express.json());
+app.use(cors({origin:"http://localhost:3000"}))
 
 mongoose.connect("mongodb+srv://alexsam:Alexsam14@cluster0.w04wli6.mongodb.net/HLC", {
     useNewUrlParser: true,
@@ -25,6 +27,7 @@ const medications = mongoose.model("Medications", medicationSchema);
 
 app.get('/api/reminders', async (req, res) => {
     try {
+        console.log("Server is hitsPPPPPPPP");
       const reminders = await medications.find();
       res.json(reminders);
     } catch (err) {
@@ -34,8 +37,10 @@ app.get('/api/reminders', async (req, res) => {
 
 
 app.post('/api/reminders', async (req, res) => {
-    const newReminder = new medications(req.body);
+    console.log("Server is hits-------");
+    console.log(req);
     try {
+        const newReminder = new medications(req.body);
       const savedReminder = await newReminder.save();
       res.json(savedReminder);
     } catch (err) {

@@ -1,84 +1,85 @@
-// src/components/Chatbot.js
-import React, { useState } from 'react';
-import './ChatbotPage.css'
+import { useState } from "react";
 
-function Chatbot() {
-  const [input, setInput] = useState("");
-  const [chatlog, setChatLog] = useState([]);
+const App = () => {
   const [error, setError] = useState("");
+  const [value, setValue] = useState("");
+  const [chatHistory, setChatHistory] = useState([]);
 
-  async function getResponse(e){
-    e.preventDefault();
+  const surpriseOptions = [
+    "Who won the last World Cup?",
+    "When is Christmas?",
+    "What is today's date??"
+  ]
 
+  const surprise = () => {
+    const randomValue = surpriseOptions[Math.floor(Math.random() * surpriseOptions.length)]
+    setValue(randomValue)
+  }
 
-    if (!input.trim()) {
-      setError("Please enter a message");
-      return;
+  const getResponse = async () => {
+    if(!value){
+      setError("Error! Please ask a question!")
+      return
     }
-
     try{
       const options = {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify({
-          history: chatlog,
-          message: input
+          history: chatHistory,
+          message: value
         }),
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         }
       }
-      const response = await fetch("http://localhost:3080/gemini", options);
-      const data = await response.text();
-      console.log(">> response: ", data);
-      setChatLog(oldChatLog => [...oldChatLog,{
-        role: "user",
-        parts: [{'text': input}]
-      },{
-        role: "model",
-        parts: data
-      }
-      ])
-      setInput("")
+      const response = await fetch("http://localhost:3500/gemini", options)
+      const data = await response.json()
 
-      console.log(">>", chatlog);
-    } catch (error) {
-      setError("Something went wrong!");
+      setChatHistory(oldChatHistory => [...oldChatHistory, 
+        {role: "user", parts: value},
+        {role: "model", parts: data.text}
+    ])
+
+    setValue("")
+      
+    }catch (error){
+      console.log(error)
+      setError("Something went wrong! Pleae try again later.")
     }
   }
 
+  const clear = () => {
+    setValue("")
+    setError("")
+    setChatHistory([])
+  }
+
   return (
-    <main className='chatbot-page'>
-      <div className='chat-log'>
-        {/* {chatlog.map ((message, index) => (
-            <ChatMessage key={index} message={message}/>
-        ))} */}
+    <div className="app">
+      <p>
+        What do you want to know?
+        <button className="surprise" onClick={surprise} disabled={!chatHistory}>Surprise me</button>
+      </p>
+      <div className="input-container">
+        <input
+          value={value}
+          placeholder="What do you want to ask?"
+          onChange={(e) => setValue(e.target.value)}>
+        </input>
+        <button onClick={getResponse}>Ask me</button>
+        <button onClick={clear}>Clear</button>
       </div>
+      
+      {error && <p>{error}</p>}
 
-      <div className='chatbox'>
-
-      <form onSubmit={getResponse}>
-      <input className='chatbox-input' value={input} onChange={(e)=>setInput(e.target.value)}
-      placeholder='Enter your query here'>
-      </input>
-      </form>
-
+      <div className="search-result">
+        {chatHistory.map((chatItem, _index) => 
+          <div key={_index}>
+            <p className="answer">{chatItem.role} : {chatItem.parts}</p>
+          </div>)}
       </div>
-    </main>
+    </div>
   );
-}
+};
 
-const ChatMessage = ({message}) => {
-  return (
-    <div className='chat-message'>
-          <div className='chat-mesage-center'>
-            <div className='avatar'>
-            </div>
-            <div className='message'>
-            {message.parts.text}
-            </div>
-          </div>
-        </div>
-  )
-}
-
-export default Chatbot;
+export default App;

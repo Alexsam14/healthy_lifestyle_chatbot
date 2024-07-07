@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect} from 'react';
 import axios from "axios";
 import { ReminderCard } from '../components/reminderCard';
 import "./MedicationReminder.css"
+import "bootstrap/dist/css/bootstrap.css"
 
 const dbReminders = [
   {'drug': 'paracetamol', 'duration': 19},
@@ -52,7 +53,7 @@ function MedicationReminder() {
   */
 
   const deleteReminder = (id) => {
-    axios.delete(`/api/reminders/${id}`)
+    axios.delete(`http://localhost:3500/api/reminders/${id}`)
       .then(() => {
         setReminderList(reminderList.filter((reminder) => reminder._id !== id));
       })
@@ -71,9 +72,13 @@ function MedicationReminder() {
   
   const onSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/reminders', formData)
+    console.log("I hsvr brrn clicked");
+    console.log(formData);
+    axios.post('http://localhost:3500/api/reminders', formData)
       .then((response) => {
+        console.log(response);
         setReminderList((prevReminderList) => [...prevReminderList, response.data]);
+        console.log(reminderList);
         setFormData({ drug: '', duration: '' }); // Reset form fields
         ref.current.reset();
       })
@@ -87,17 +92,20 @@ function MedicationReminder() {
       <h1 className='main-heading'>Welcome to the medication reminder</h1>
       
       <div className='reminder-dialogue-box'>
-        <form ref={ref} className='forms' onSubmit={onSubmit}>
-          <input onChange={onInputChange} className='form_1' type="text" name="drug" value={formData.drug} placeholder='Enter drug'required />
-          <input onChange={onInputChange} className='form_2' type="number" name="duration" value={formData.duration} placeholder='Enter duration in hours' required />
-          <input className="submit" type="submit" value="Submit" />
+        <form ref={ref}  onSubmit={onSubmit} className="form">
+          <div className='form-floating'>
+          <label htmlFor="drug" className='form-label'>Enter drug</label>
+          <input onChange={onInputChange} className='form_1 form-control' type="text" id= "drug" name="drug" value={formData.drug} placeholder='Enter drug'required />
+          <label htmlFor= "duration" className='form-label'>Enter duration in hours</label>
+          <input onChange={onInputChange} className='form_2 form-control' id = "duration"type="number" name="duration" value={formData.duration} placeholder='Enter duration in hours' required />
+          <input className="submit btn btn-lg" type="submit" /></div>
         </form>
 
       </div>
 
       <div className='dashboard'>
         {reminderList.map((data) => (
-          <ReminderCard key={data._id} drug={data.drug} duration={data.duration}  onDelete={() => deleteReminder(data._id)}/>
+          <ReminderCard key={data?._id} data={data}   onDelete={() => deleteReminder(data?._id)}/>
         ))}
       </div>
 
