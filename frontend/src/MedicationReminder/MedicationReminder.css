@@ -27,6 +27,7 @@
     width: 20%;
     font-size: larger;
     background-color: #ff4f6e;
+    margin-bottom: 20px;
 }
 
 .reminder-dialogue-box{
@@ -40,11 +41,13 @@
 }
 
 .dashboard{
-    min-height: 60vh;
-    width: 80%;
-    margin: auto;
-
-    background-color: red;
+    /* min-height: 60vh; */
+    width: 600px;
+    margin: 40px 0;
+    height: 500px;
+    background-color: #ff4f6e;
+    border-radius: 5px;
+    padding-top: 10px;
 }
 
 footer{

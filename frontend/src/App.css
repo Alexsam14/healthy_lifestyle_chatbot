@@ -2,10 +2,11 @@
 @import url('./HomePage/HomePage.css');
 
 
-main {
+.main {
   text-align: center;
   min-height: 100vh;
   background-color: #ff4f6e;
+  width: 900px;
   margin: 0;
   padding: 0;
 }
@@ -54,9 +55,14 @@ main {
 .reminder-card{
   display: flex;
   gap: 20px;
-  background: gray;
+  background: #fff;
+  color: #ff4f6e;
   padding: 10px;
   margin: 10px;
+}
+
+.modification button{
+  background-color: #ff4f6e;
 }
 
 .drug-name{
@@ -67,9 +73,10 @@ main {
 
 .modification{
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
-  background: blue;
+  align-items: center;
+  /* background: blue; */
   flex-basis: 20%;
 }
 
@@ -80,3 +87,5 @@ main {
 .register-link a {
   display: inline;
 }
+
+.change{width: 900px !important; }

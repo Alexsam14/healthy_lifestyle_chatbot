@@ -9,7 +9,7 @@ function Header() {
 				<p className="logo" ml-3>HLC</p>
 				<ul>
 					<li className="btn  btn-lg">
-						<NavLink to="/sign-in">Sign-In</NavLink>
+						<NavLink to="/log-in">Login</NavLink>
 					</li>
 					<li className="btn  btn-lg">
 						<NavLink to="/about-page">About Us</NavLink>

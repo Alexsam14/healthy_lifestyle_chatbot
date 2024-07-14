@@ -2,8 +2,8 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.css"
 import Chatbot from './Chatbot/Chatbot';
 import MedicationReminder from './MedicationReminder/MedicationReminder';
-import SignIn from './components/sign-in';
-import Register from './components/register-account';
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
 import About from './components/about-page';
 import Header from './Header';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
@@ -26,16 +26,7 @@ const Main = () => {
         >
           Medication Reminder
         </button>
-        {/* <button 
-          onClick={() => navigate('/sign-in')}
-        >
-          Sign-In
-        </button>
-        <button 
-          onClick={() => navigate('/about-us')}
-        >
-          About Us
-        </button> */}
+       
 
 
       </div>
@@ -50,14 +41,13 @@ function App() {
       <Header />
       <Routes>
         <Route path="/about-us" element={<About />} />
-        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/log-in" element={<LogIn />} />
       </Routes>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Main />} className = "change"/>
         <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/medication-reminder" element={<MedicationReminder />} />
-        <Route path="/sign-in/register" element={<Register />} />
-        
+        <Route path="/log-in/sign-up" element={<SignUp />} />
       </Routes>
     </Router>
   );
