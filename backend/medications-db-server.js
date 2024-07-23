@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 const bodyparser = require('body-parser')
 const cors = require("cors")
 const bcrypt = require('bcrypt')
-const PORT = 3500
+const PORT = 3004
 require("dotenv").config()
 
 const JWT_SECRET = process.env.JWT_SECRET

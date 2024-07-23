@@ -1,73 +1,109 @@
-.forms{
-    display: flex;
-    gap: 20px;
-    height: 50%;
-    width: 100%;
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.form_1{
-    height: 40%;
-    margin-top: 30px;
-    width: 40%;
-    font-size: larger;
-    padding-left: 10px;
+.content-container {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.form_2{
-    height: 40%;
-    margin-top: 30px;
-    width: 40%;
-    font-size: larger;
-    padding-left: 10px;
+.medication-reminder {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.submit{
-    height: 40%;
-    margin-top: 30px;
-    width: 20%;
-    font-size: larger;
-    background-color: #ff4f6e;
-    margin-bottom: 20px;
+.main-heading {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 48px;
+  font-weight: 700;
+  color: #333;
 }
 
-.reminder-dialogue-box{
-    width: 80%;
-    margin-left: 100px;
-    height: 200px;
+.reminder-dialogue-box {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.main-heading{
-    text-align: center;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.dashboard{
-    /* min-height: 60vh; */
-    width: 600px;
-    margin: 40px 0;
-    height: 500px;
-    background-color: #ff4f6e;
-    border-radius: 5px;
-    padding-top: 10px;
+.form-floating {
+  width: 100%;
 }
 
-footer{
-    /* position: absolute;
-    bottom: 10px; */
-    text-align: center;
-    margin-left: 100px;
-    width: 80%;
+.form_1,
+.form_2,
+.form-control {
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  padding: 10px 15px;
+}
+
+.submit {
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  background-color: #00a86b;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #008f5a;
+}
+
+.dashboard {
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #00a86b;
+  border-radius: 8px;
+  padding: 20px;
 }
 
 .checkbox-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding-inline: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
 }
+
 .checkbox-item {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
+
 .checkbox-item input {
-    margin-right: 5px;
+  margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+  .reminder-dialogue-box,
+  .dashboard {
+    max-width: 100%;
+  }
+  
+  .main-heading {
+    font-size: 36px;
+  }
 }

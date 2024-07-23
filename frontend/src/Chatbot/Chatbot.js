@@ -1,6 +1,8 @@
 import { useState } from "react";
+import Header from '../Header';  // Import the Header component
+import './ChatbotPage.css';
 
-const App = () => {
+const Chatbot = () => {
   const [error, setError] = useState("");
   const [value, setValue] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
@@ -15,6 +17,12 @@ const App = () => {
     const randomValue = surpriseOptions[Math.floor(Math.random() * surpriseOptions.length)]
     setValue(randomValue)
   }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      getResponse();
+    }
+  };
 
   const getResponse = async () => {
     if(!value){
@@ -32,7 +40,7 @@ const App = () => {
           "Content-Type": "application/json"
         }
       }
-      const response = await fetch("http://localhost:3500/gemini", options)
+      const response = await fetch("http://localhost:3003/gemini", options)
       const data = await response.json()
 
       setChatHistory(oldChatHistory => [...oldChatHistory, 
@@ -44,7 +52,7 @@ const App = () => {
       
     }catch (error){
       console.log(error)
-      setError("Something went wrong! Pleae try again later.")
+      setError("Something went wrong! Please try again later.")
     }
   }
 
@@ -55,31 +63,37 @@ const App = () => {
   }
 
   return (
-    <div className="app">
-      <p>
-        What do you want to know?
-        <button className="surprise" onClick={surprise} disabled={!chatHistory}>Surprise me</button>
-      </p>
-      <div className="input-container">
-        <input
-          value={value}
-          placeholder="What do you want to ask?"
-          onChange={(e) => setValue(e.target.value)}>
-        </input>
-        <button onClick={getResponse}>Ask me</button>
-        <button onClick={clear}>Clear</button>
-      </div>
-      
-      {error && <p>{error}</p>}
+    <div className="app-container">
+      <Header />
+      <div className="content-container">
+        <div className="chatbot-content">
+          <p>
+            What do you want to know?
+            <button className="surprise" onClick={surprise} disabled={!chatHistory}>Surprise me</button>
+          </p>
+          <div className="input-container">
+            <input
+              value={value}
+              placeholder="What do you want to ask?"
+              onChange={(e) => setValue(e.target.value)}
+              onKeyDown={handleKeyDown}>
+            </input>
+            <button className="ask-button" onClick={getResponse}>Ask me</button>
+            <button className="ask-button" onClick={clear}>Clear</button>
+          </div>
+          
+          {error && <p className="error">{error}</p>}
 
-      <div className="search-result">
-        {chatHistory.map((chatItem, _index) => 
-          <div key={_index}>
-            <p className="answer">{chatItem.role} : {chatItem.parts}</p>
-          </div>)}
+          <div className="search-result">
+            {chatHistory.map((chatItem, _index) => 
+              <div key={_index}>
+                <p className="answer">{chatItem.role} : {chatItem.parts}</p>
+              </div>)}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default App;
+export default Chatbot;

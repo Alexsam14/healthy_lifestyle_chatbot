@@ -1,5 +1,5 @@
 require("dotenv").config()
-const PORT = 3500
+const PORT = 3003
 const express = require("express")
 const cors = require("cors")
 const app = express()
@@ -12,8 +12,20 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY)
 
 app.post('/gemini', async (req, res) => {
     try{
-        const model = await genAI.getGenerativeModel({model: "gemini-1.5-pro"})
+        const model = await genAI.getGenerativeModel({model: "gemini-1.5-pro",
+            systemInstruction: "You only answer health-related queries as brief as possible. You are integrated with a health chatbot. The name is Healthy Lifestyle Chatbot."
+        })
+
+        const generationConfig = {
+            temperature: 0.5,
+            topP: 0.95,
+            topK: 64,
+            maxOutputTokens: 8192,
+            responseMimeType: "text/plain",
+          };
+
         const chat = model.startChat({
+            generationConfig,
             history: req.body.history.map(item => ({
                 role: item.role,
                 parts: [{text: item.parts}]

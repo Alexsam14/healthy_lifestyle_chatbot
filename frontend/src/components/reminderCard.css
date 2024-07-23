@@ -1,0 +1,47 @@
+.reminder-card {
+    border: 1px solid #00a86b;
+    background-color: #00a86b1a;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width */
+}
+
+.reminder-card .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.reminder-card .drug-info {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.reminder-card .modification {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.reminder-card .drug-name{
+    width: 30%;
+    font-size: 16px;
+}
+
+.reminder-card .drug-info {
+    color: #fff;
+    font-size: 16px;
+    margin: 0 10px;
+    width: 30%;
+}
+
+.reminder-card .btn {
+    background-color: #00a86b;
+    border-color: #00a86b;
+    color: #fff;
+    font-size: 16px;
+    margin: 0 5px;
+}

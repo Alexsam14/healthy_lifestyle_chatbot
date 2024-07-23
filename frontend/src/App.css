@@ -1,58 +1,91 @@
 @import url('./Chatbot/ChatbotPage.css');
 @import url('./HomePage/HomePage.css');
 
-
-.main {
-  text-align: center;
+.app-container {
+  width: 100%;
   min-height: 100vh;
-  background-color: #ff4f6e;
-  width: 900px;
-  margin: 0;
-  padding: 0;
-}
-
-.main-title {
-  margin: 0;
-  padding: 1em;
-  font-size: 3em;
-  color: white;
-}
-
-.main-actions {
   display: flex;
-  margin: auto;
-  padding: 10px;
-  gap: 10px;
+  flex-direction: column;
+}
+
+.content-container {
+  flex: 1;
+  width: 100%;
+  display: flex;
   justify-content: center;
 }
 
-.main-actions button {
-  padding: 8px 16px;
-  color: white;
-  background: transparent;
-  border-radius: 50px;
-  border: 2px solid white;
+.main-content {
+  width: 100%;
+  margin: 0 auto;
+  padding: 80px 20px;
+}
+
+.main-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 24px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.main-description {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.feature-boxes {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.feature-box {
+  flex: 0 1 calc(50% - 12px);
+}
+
+.feature-box:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.feature-box button {
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  background-color: #00a86b;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  transition: e;
+  transition: background-color 0.3s ease;
 }
 
-.main-actions button:first-child {
-  background-color: white;
-  color: #ff4f6e;
+.feature-box button:hover {
+  background-color: #008f5a;
 }
 
-.main-actions button:nth-child(2) {
-  background-color: white;
-  color: #ff4f6e;
+.feature-box p {
+  margin-top: 16px;
+  font-size: 16px;
+  color: #666;
 }
 
-.main-actions button:last-child{
-  background-color: white;
-  color: #ff4f6e;
+@media (max-width: 768px) {
+  .feature-boxes {
+    flex-direction: column;
+  }
+  .feature-box {
+    width: 100%;
+  }
 }
 
 /* Dashboard */
-.reminder-card{
+.reminder-card {
   display: flex;
   gap: 20px;
   background: #fff;
@@ -61,22 +94,20 @@
   margin: 10px;
 }
 
-.modification button{
+.modification button {
   background-color: #ff4f6e;
 }
 
-.drug-name{
+.drug-name {
   width: 50%;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.modification{
+.modification {
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
-  /* background: blue; */
   flex-basis: 20%;
 }
 
@@ -88,4 +119,100 @@
   display: inline;
 }
 
-.change{width: 900px !important; }
+.change {
+  width: 100% !important;
+  max-width: 900px;
+}
+
+/* Header Styles */
+.navbar-menu-light {
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.navbar-menu-light-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-menu-light-max-width {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 30px;
+}
+
+.navbar-menu-light-link {
+  text-decoration: none;
+}
+
+.navbar-menu-light-left-side {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-menu-light-logo {
+  max-width: 100px;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+}
+
+.navbar-menu-light-right-side {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-menu-light-super-menu ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.super-menu-item {
+  margin-left: 25px;
+}
+
+.navbar-menu-light-label {
+  text-decoration: none;
+  color: #333333;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 0px;
+  background-color: #00a86b;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-menu-light-label:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #008f5a;
+}
+
+.navbar-menu-light-label[to="/log-in"] {
+  color: #ffffff;
+  background-color: #00a86b;
+}
+
+.navbar-menu-light-label[to="/log-in"]:hover {
+  background-color: #008f5a;
+}
+
+@media (max-width: 768px) {
+  .navbar-menu-light-max-width {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-menu-light-right-side {
+    margin-top: 15px;
+  }
+
+  .super-menu-item {
+    margin-left: 0;
+    margin-right: 15px;
+  }
+}

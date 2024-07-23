@@ -1,30 +1,92 @@
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0px 5px 0px 0px;
-    p{
-        font-size: 40px;
-        font-weight: 900;
-        margin: 0px 0px 0px 100px;
-        color: #ff4f6e;
-    }
-    
-    ul{
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    margin-top: 20px;
-    margin-right: 100px;
+.navbar-menu-light {
+  width: 100%;
+  background-color: #ffffff;
+  //box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-    li{
-        margin: 5px;
-        list-style: none;
-        background-color: #ff4f6e !important;
+.navbar-menu-light-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-        a{
-            text-decoration: none;
-            color: #fff;
-        }
+.navbar-menu-light-max-width {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 30px;
+}
+
+.navbar-menu-light-link {
+  text-decoration: none;
+}
+
+.navbar-menu-light-left-side {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-menu-light-logo {
+  max-width: 100px;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+}
+
+.navbar-menu-light-right-side {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-menu-light-super-menu ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.super-menu-item {
+  margin-left: 25px;
+}
+
+.navbar-menu-light-label {
+  text-decoration: none;
+  color: #333333;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 0px;
+  background-color: #00a86b;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #008f5a;
+  }
+
+  &[to="/log-in"] {
+    color: #ffffff;
+    background-color: #00a86b;
+
+    &:hover {
+      background-color: #008f5a;
     }
-}}
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-menu-light-max-width {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-menu-light-right-side {
+    margin-top: 15px;
+  }
+
+  .super-menu-item {
+    margin-left: 0;
+    margin-right: 15px;
+  }
+}

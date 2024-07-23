@@ -93,5 +93,5 @@ cron.schedule('* * * * *', () => {
     sendReminders().catch(console.error);
 });
 
-const PORT = 3501;
+const PORT = 3002;
 app.listen(PORT, () => console.log(`Email server running on port ${PORT}`));
