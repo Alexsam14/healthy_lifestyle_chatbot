@@ -34,6 +34,60 @@ const UsersSchema = new mongoose.Schema({
 }, {strict: true})
 const users = mongoose.model("Users", UsersSchema);
 
+// Add this new schema for storing invalidated tokens
+const TokenBlacklistSchema = new mongoose.Schema({
+  token: { type: String, required: true, unique: true },
+  expiresAt: { type: Date, required: true },
+});
+
+const TokenBlacklist = mongoose.model("TokenBlacklist", TokenBlacklistSchema);
+
+// Middleware to verify JWT token
+const verifyToken = async (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
+    return res.status(403).json({ message: "No token provided" });
+  }
+
+  try {
+    // Check if the token is blacklisted
+    const blacklistedToken = await TokenBlacklist.findOne({ token });
+    if (blacklistedToken) {
+      return res.status(401).json({ message: "Token is no longer valid" });
+    }
+
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.userId = decoded.userId;
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: "Invalid token" });
+  }
+};
+
+// ... (your existing login and register routes)
+
+// New logout route
+app.post("/logout", verifyToken, async (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  try {
+    const decoded = jwt.decode(token);
+    const expiresAt = new Date(decoded.exp * 1000); // Convert expiration time to milliseconds
+
+    // Add the token to the blacklist
+    const blacklistedToken = new TokenBlacklist({
+      token,
+      expiresAt,
+    });
+    await blacklistedToken.save();
+
+    res.json({ message: "Logged out successfully" });
+  } catch (error) {
+    console.error('Logout error: ', error);
+    res.status(500).json({ message: "Server error during logout" });
+  }
+});
+
+
 
 app.post("/login", async (req, res) => {
   const {email, password} = req.body;
@@ -92,6 +146,10 @@ app.post("/register", async (req, res) => {
       }
 })
 
+setInterval(async () => {
+  const now = new Date();
+  await TokenBlacklist.deleteMany({ expiresAt: { $lt: now } });
+}, 24 * 60 * 60 * 1000); // Run daily
 
 app.listen(PORT, function(){
     (`Credentials Server is running on port ${PORT}`);

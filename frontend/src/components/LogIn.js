@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
 import Header from '../Header';  // Make sure this path is correct
 import './LogIn.css';  // Make sure to create and import this CSS file
@@ -8,17 +8,17 @@ function LogIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      console.log('Sending login request with email:', email);
-      console.log('Password length:', password ? password.length : 0);
       axios.post("http://localhost:3001/login", { email, password })
           .then(result => {
               console.log('Server response:', result.data);
               if (result.data.message === "Success") {
                   localStorage.setItem('token', result.data.token);
-                  navigate("/main");
+                  const from = location.state?.from?.pathname || '/main';
+                  navigate(from, { replace: true });
               } else {
                   navigate("/");
                   alert("You are not registered to this service");

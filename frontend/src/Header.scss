@@ -44,10 +44,13 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 .super-menu-item {
   margin-left: 25px;
+  display: flex; // Add this line
+  align-items: center;
 }
 
 .navbar-menu-light-label {
@@ -74,6 +77,23 @@
     }
   }
 }
+
+.logout-button {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  background-color: 00a86b;
+  color: #333333;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 16px;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #008f5a;
+  }
+}
+
 
 @media (max-width: 768px) {
   .navbar-menu-light-max-width {

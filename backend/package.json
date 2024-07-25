@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start:server1": "node credentials.js",
-    "start:server2": "node semail-server.js",
+    "start:server2": "node email-server.js",
     "start:server3": "node gemini-backend.js",
     "start:server4": "node medications-db-server.js",
     "start:all": "concurrently \"npm run start:server1\" \"npm run start:server2\" \"npm run start:server3\" \"npm run start:server4\""

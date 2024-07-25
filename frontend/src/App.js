@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.css"
 import Chatbot from './Chatbot/Chatbot';
@@ -6,15 +7,14 @@ import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import About from './components/about-page';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
-
-// Import the Header component
 import Header from './Header';
+import ProtectedRoute from './ProtectedRoute';
 
-const Main = () => {
+const Main = ({ isLoggedIn, handleLogout }) => {
   const navigate = useNavigate();
   return (
     <>
-      <Header />
+      <Header showLogout={isLoggedIn} onLogout={handleLogout}/>
       <main>
         <div className="main-content">
           <h1 className="main-title">Welcome to Healthy Lifestyle Chatbot</h1>
@@ -38,14 +38,34 @@ const Main = () => {
 };
 
 function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('token');
+  };
+
   return (
     <Router>
       <Routes>
         <Route path="/about-us" element={<About />} />
         <Route path="/" element={<LogIn />} />
-        <Route path="/main" element={<Main />} />
-        <Route path="/main/chatbot" element={<Chatbot />} />
-        <Route path="/main/medication-reminder" element={<MedicationReminder />} />
+        <Route path="/main" element={
+          <ProtectedRoute>
+          <Main isLoggedIn={isLoggedIn} handleLogout={handleLogout} />}
+          </ProtectedRoute>
+        } />
+        <Route path="/main/chatbot" element={
+          <ProtectedRoute>
+          <Chatbot />
+          </ProtectedRoute>
+        } />  
+        <Route path="/main/medication-reminder" element={
+          <ProtectedRoute>
+          <MedicationReminder />
+          </ProtectedRoute>
+        } />  
         <Route path="/sign-up" element={<SignUp />} />
       </Routes>
     </Router>

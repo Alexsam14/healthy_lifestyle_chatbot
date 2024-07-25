@@ -1,8 +1,31 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css"
 import "./Header.scss";
+import axios from 'axios';
 
-function Header({ showLogout = true }) {  // Add this prop with a default value
+function Header({ showLogout = true , onLogout}) {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        await axios.post('http://localhost:3001/logout', {}, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+      } catch (error) {
+        console.error('Logout error:', error);
+      }
+    }
+    
+    localStorage.removeItem('token');
+    
+    if (onLogout) {
+      onLogout();
+    }
+    navigate('/'); // Redirect to home page after logout
+  };
+
   return (
     <>
       <header className="navbar-menu-light">
@@ -21,7 +44,7 @@ function Header({ showLogout = true }) {  // Add this prop with a default value
                   </li>
                   {showLogout && (  // Only render the Logout button if showLogout is true
                     <li className="super-menu-item">
-                      <NavLink to="/" className="navbar-menu-light-label">Log Out</NavLink>
+                      <button onClick={handleLogout} className="navbar-menu-light-label logout-button">Log Out</button>
                     </li>
                   )}
                 </ul>

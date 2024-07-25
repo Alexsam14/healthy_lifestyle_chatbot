@@ -8,9 +8,9 @@ const Chatbot = () => {
   const [chatHistory, setChatHistory] = useState([]);
 
   const surpriseOptions = [
-    "Who won the last World Cup?",
-    "When is Christmas?",
-    "What is today's date??"
+    "What is AIDS?",
+    "What causes cholera?",
+    "Who is Lionel Messi?"
   ]
 
   const surprise = () => {
